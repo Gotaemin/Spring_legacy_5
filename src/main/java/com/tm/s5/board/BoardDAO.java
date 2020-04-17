@@ -1,13 +1,18 @@
 package com.tm.s5.board;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardDAO {
-	//List
-	public List<BoardVO> boardList() throws Exception;
 	
-	//Select
-	public BoardVO boardSelect() throws Exception;
+	//count 
+	public long boardCount() throws Exception;
+	
+	//List
+	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception;
+	
+	//Select One
+	public BoardVO boardSelect(long num) throws Exception;
 	
 	//insert
 	public int boardWrite(BoardVO boardVO) throws Exception;
@@ -19,6 +24,6 @@ public interface BoardDAO {
 	public int boardUpdate(BoardVO boardVO) throws Exception;
 	
 	//hit update
-	public int hitUpdate(BoardVO boardVO) throws Exception;
+	public int hitUpdate(long num) throws Exception;
 	
 }

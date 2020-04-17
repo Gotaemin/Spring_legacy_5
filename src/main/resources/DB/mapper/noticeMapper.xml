@@ -17,8 +17,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update notice set title=#{title}, writer=#{writer}, contents=#{contents} where num=#{num}
 	</update>
 	
-	<update id="hitUpdate" parameterType="com.tm.s5.notice.NoticeVO">
-		update notice set hit = #{hit} where num=#{num}
+	<update id="hitUpdate" parameterType="java.lang.Long">
+		update notice set hit = hit+1 where num=#{num}
 	</update>
+	
+	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.tm.s5.notice.NoticeVO">
+		select * from notice where num=#{num}
+	</select>
+	
+	<select id="boardList" resultType="com.tm.s5.notice.NoticeVO" parameterType="java.util.Map">
+		select * from 
+			(select N.*, rownum R from 
+				(select * from notice where num>=1 order by num desc)N) 
+		where R between #{startRow} and #{lastRow}
+	</select>
+	
+	<select id="boardCount" resultType="java.lang.Long">
+		select count(num) from notice
+	</select>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
