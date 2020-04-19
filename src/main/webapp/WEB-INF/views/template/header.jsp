@@ -22,18 +22,18 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 			
-			<c:if test="${empty member}">
-				<li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span>
+			<c:if test="${empty memberVO}">
+				<li><a href="${pageContext.request.contextPath}/user/userJoin"><span class="glyphicon glyphicon-user"></span>
 						Sign Up</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span>
+				<li><a href="${pageContext.request.contextPath}/user/userLogin"><span class="glyphicon glyphicon-log-in"></span>
 						Login</a></li>
 			</c:if>
 			
 			
-			<c:if test="${not empty member}">
-				<li><a href="${pageContext.request.contextPath}/member/memberPage?member=${member}"><span class="glyphicon glyphicon-user"></span>
+			<c:if test="${not empty memberVO}">
+				<li><a href="${pageContext.request.contextPath}/user/userPage?user=${user}"><span class="glyphicon glyphicon-user"></span>
 						myPage</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span>
+				<li><a href="${pageContext.request.contextPath}/user/userLogout"><span class="glyphicon glyphicon-log-in"></span>
 						Logout</a></li>
 			</c:if>
 				
