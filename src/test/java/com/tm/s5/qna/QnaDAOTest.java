@@ -1,9 +1,12 @@
 package com.tm.s5.qna;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tm.s5.AbstractTestCase;
+import com.tm.s5.board.BoardVO;
 
 public class QnaDAOTest extends AbstractTestCase {
 
@@ -11,7 +14,7 @@ public class QnaDAOTest extends AbstractTestCase {
 	private QnaDAO qnaDAO;
 	
 	
-	@Test
+//	@Test
 	public void qnaWrite() throws Exception {
 		QnaVO qnaVO = new QnaVO();
 		qnaVO.setTitle("title");
@@ -19,6 +22,14 @@ public class QnaDAOTest extends AbstractTestCase {
 		qnaVO.setWriter("writer");
 		
 		qnaDAO.boardWrite(qnaVO);
+	}
+	
+	@Test
+	public void qnaSelect() throws Exception{
+		
+		BoardVO boardVO = qnaDAO.boardSelect(2);
+		
+		assertNotNull(boardVO);
 	}
 
 }

@@ -5,31 +5,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.tm.s5.qna.QnaDAO">
-	<insert id="qnaWrite" parameterType="com.tm.s5.qna.QnaVO">
+	<insert id="boardWrite" parameterType="com.tm.s5.qna.QnaVO">
 		insert into qna values(qna_seq.nextVal,#{title},#{writer},#{contents},sysdate,0,0,0,0)	
 	</insert>
 	
-	<delete id="qnaDelete" parameterType="java.lang.Long">
+	<delete id="boardDelete" parameterType="java.lang.Long">
 		delete from qna where num=#{num}
 	</delete>
 	
-	<update id="qnaUpdate" parameterType="com.tm.s5.qna.QnaVO">
+	<update id="boardUpdate" parameterType="com.tm.s5.qna.QnaVO">
 		update qna set title=#{title},contents=#{contents} where num=#{num}
 	</update>
 	
 	<update id="hitUpdate" parameterType="java.lang.Long">
-		update qna set hit = hit+1 from qna where num=#{num}
+		update qna set hit = hit+1 where num=#{num}
 	</update>
 	
-	<select id="qnaSelect" parameterType="java.lang.Long" resultType="com.tm.s5.qna.QnaVO">
+	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.tm.s5.qna.QnaVO">
 		select * from qna where num=#{num}
 	</select>
 	
-	<select id="qnaList" parameterType="java.util.Map" resultType="com.tm.s5.qna.QnaVO">
+	<select id="boardList" parameterType="java.util.Map" resultType="com.tm.s5.qna.QnaVO">
 		select * from 
 			(select N.*, rownum R from 
 				(select * from qna where num>=1 order by num desc)N) 
 		where R between #{startRow} and #{lastRow}
+	</select>
+	
+	<select id="boardCount" resultType="java.lang.Long">
+		select count(num) from notice
 	</select>
 	
 

@@ -30,15 +30,15 @@ public class NoticeDAOTest extends AbstractTestCase{
 		assertNotEquals(0, ar.size());
 	}
 	
-//	@Test
+	@Test
 	public void boardSelect() throws Exception{
 		
-		BoardVO boardVO = noticeDAO.boardSelect(2);
+		BoardVO boardVO = noticeDAO.boardSelect(303);
 		
 		assertNotNull(boardVO);
 	}
 	
-	@Test
+//	@Test
 	public void boardWriteTest() throws Exception{
 		int result = 0;
 		
@@ -46,7 +46,7 @@ public class NoticeDAOTest extends AbstractTestCase{
 		String title = "";
 		String contents="";
 		
-		for (int i = 0; i < 150; i++) {
+		for (int i = 0; i < 3; i++) {
 			NoticeVO noticeVO = new NoticeVO();
 			
 			if(i%3==0) {

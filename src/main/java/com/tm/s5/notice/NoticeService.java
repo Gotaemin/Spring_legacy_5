@@ -26,15 +26,15 @@ public class NoticeService implements BoardService {
 		map.put("lastRow", lastRow);
 		
 		//총글의 개수
-		long totalCount = noticeDAO.boardCount();
-		System.out.println(totalCount);
-		
-		//총페이지의 개수
-		long totalPage = totalCount/10;
-		if(totalCount % 10 != 0) {
-			totalPage++;
-		}
-		System.out.println(totalPage);
+//		long totalCount = noticeDAO.boardCount();
+//		System.out.println(totalCount);
+//		
+//		//총페이지의 개수
+//		long totalPage = totalCount/10;
+//		if(totalCount % 10 != 0) {
+//			totalPage++;
+//		}
+//		System.out.println(totalPage);
 		
 		return noticeDAO.boardList(map);
 	}

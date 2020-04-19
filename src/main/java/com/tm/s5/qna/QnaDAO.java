@@ -20,37 +20,37 @@ public class QnaDAO implements BoardDAO {
 	
 	@Override
 	public long boardCount() throws Exception {
-		return 0;
+		return sqlsession.selectOne(NAMESPACE+"boardCount");
 	}
 
 	@Override
 	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception {
-		return null;
+		return sqlsession.selectList(NAMESPACE+"boardList",map);
 	}
 
 	@Override
 	public BoardVO boardSelect(long num) throws Exception {
-		return null;
+		return sqlsession.selectOne(NAMESPACE+"boardSelect", num);
 	}
 
 	@Override
 	public int boardWrite(BoardVO boardVO) throws Exception {
-		return sqlsession.insert(NAMESPACE+"qnaWrite", boardVO);
+		return sqlsession.insert(NAMESPACE+"boardWrite", boardVO);
 	}
 
 	@Override
 	public int boardDelete(long num) throws Exception {
-		return 0;
+		return sqlsession.delete(NAMESPACE+"boardDelete", num);
 	}
 
 	@Override
 	public int boardUpdate(BoardVO boardVO) throws Exception {
-		return 0;
+		return sqlsession.update(NAMESPACE+"boardUpdate", boardVO);
 	}
 
 	@Override
 	public int hitUpdate(long num) throws Exception {
-		return 0;
+		return sqlsession.update(NAMESPACE+"hitUpdate", num);
 	}
 
 }

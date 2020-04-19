@@ -5,6 +5,8 @@ import java.util.Map;
 
 public interface BoardDAO {
 	
+	
+	
 	//count 
 	public long boardCount() throws Exception;
 	
