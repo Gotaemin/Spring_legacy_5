@@ -1,17 +1,18 @@
 package com.tm.s5.board;
 
 import java.util.List;
-import java.util.Map;
+
+import com.tm.s5.board.page.Pager;
 
 public interface BoardDAO {
 	
 	
 	
 	//count 
-	public long boardCount() throws Exception;
+	public long boardCount(Pager pager) throws Exception;
 	
 	//List
-	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception;
+	public List<BoardVO> boardList(Pager pager) throws Exception;
 	
 	//Select One
 	public BoardVO boardSelect(long num) throws Exception;

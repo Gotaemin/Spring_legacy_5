@@ -14,7 +14,7 @@
 
 	<div class="container">
 
-		<form action="./${board}List" style="float: right;margin-top: 50px;">
+		<form action="./${member}List" style="float: right;margin-top: 50px;">
 			
 			<div class="input-group col-xs-3" style="float: right;">
 				<input type="text" class="form-control" placeholder="Search" name="search">
@@ -26,9 +26,10 @@
 			</div>
 			<div class="form-group col-xs-2" style="float: right;">
 				<select class="form-control" id="sel1" name="kind" >
-					<option value="bt">Title</option>
-					<option value="bc">Contents</option>
-					<option value="bw">Writer</option>
+					<option value="mid">id</option>
+					<option value="mname">name</option>
+					<option value="mphone">phone</option>
+					<option value="memail">email</option>
 				</select>
 			</div>
 		</form>
@@ -36,21 +37,19 @@
 		<table class="table table-hover" style="margin-top: 50px;clear: right;">
 			<thead>
 				<tr>
-					<th>num</th>
-					<th>title</th>
-					<th>writer</th>
-					<th>date</th>
-					<th>hit</th>
+					<th>id</th>
+					<th>name</th>
+					<th>phone</th>
+					<th>email</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="list" items="${list}">
 					<tr>
-						<td>${list.num}</td>
-						<td><a href="./${board}Select?num=${list.num}">${list.title}</a></td>
-						<td>${list.writer}</td>
-						<td>${list.regdate}</td>
-						<td>${list.hit}</td>
+						<td>${list.id}</td>
+						<td>${list.name}</td>
+						<td>${list.phone}</td>
+						<td>${list.email}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -59,18 +58,18 @@
 		<div style="text-align: center;">
 			<ul class="pagination">
 				<c:if test="${pager.curBlock gt 1}">
-					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"><</a>
+					<li><a href="./${member}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"><</a>
 					</li>
 				</c:if>
 
 				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 
-					<li><a href="./${board}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+					<li><a href="./${member}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 
 				</c:forEach>
 
 				<c:if test="${pager.curBlock lt pager.totalBlock}">
-					<li><a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">></a></li>
+					<li><a href="./${member}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">></a></li>
 				</c:if>
 
 			</ul>
@@ -78,7 +77,7 @@
 
 
 		<div>
-			<a href="./${board}Write" class="btn btn-primary">Write</a>
+			<a href="./${member}Write" class="btn btn-primary">Write</a>
 		</div>
 	</div>
 

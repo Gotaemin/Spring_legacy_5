@@ -6,8 +6,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   
 <mapper namespace="com.tm.s5.user.UserDAO">
+
+	<sql id="search">
+		like '%' || #{search} || '%'	
+	</sql>
+
 	<select id="memberLogin" parameterType="com.tm.s5.user.UserVO" resultType="com.tm.s5.user.UserVO">
 		select * from userInfo where id=#{id} and pwd=#{pwd}
 	</select>
+	
+	<select id="memberList" parameterType="com.tm.s5.member.memberPage.MemberPager" resultType="com.tm.s5.user.UserVO">
+		select * from 
+			(select N.*, rownum R from 
+				(select * from userInfo where 
+				
+				<choose>
+					<when test="kind == 'mid'">
+						id
+					</when>
+					<when test="kind == 'mname'">
+						name 
+					</when>
+					<when test="kind == 'mphone'">
+						phone
+					</when>
+					<otherwise>
+						email 
+					</otherwise>
+				</choose>
+				
+				<include refid="search"></include>  order by id desc)N) 
+		where R between #{startRow} and #{lastRow}
+	
+	</select>
+	
+	<select id="memberCount" parameterType="com.tm.s5.member.memberPage.MemberPager" resultType="java.lang.Long">
+		select count(id) from userInfo 
+				
+				<where>
+					<if test="kind == 'mid'">
+						id <include refid="search"></include>
+					</if>
+					<if test="kind == 'mname'">
+						name <include refid="search"></include>
+					</if>
+					<if test="kind == 'mphone'">
+						phone <include refid="search"></include>
+					</if>
+					<if test="kind == 'memail'">
+						email <include refid="search"></include>
+					</if>
+				</where>
+	</select>
+	
+	<insert id="memberJoin" parameterType="com.tm.s5.user.UserVO">
+			insert into userInfo values(#{id},#{pwd},#{name},#{phone},#{email})
+	</insert>
+	
 
 </mapper>

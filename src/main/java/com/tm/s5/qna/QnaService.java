@@ -1,14 +1,13 @@
 package com.tm.s5.qna;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tm.s5.board.BoardService;
 import com.tm.s5.board.BoardVO;
+import com.tm.s5.board.page.Pager;
 
 @Service
 public class QnaService implements BoardService {
@@ -17,16 +16,14 @@ public class QnaService implements BoardService {
 	private QnaDAO qnaDAO;
 	
 	@Override
-	public List<BoardVO> boardList(int curPage) throws Exception {
-		int starRow = (curPage-1)*10+1;
-		int lastRow = curPage * 10;
+	public List<BoardVO> boardList(Pager pager) throws Exception {
 		
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("startRow", starRow);
-		map.put("lastRow", lastRow);
+		pager.makeRow();
 		
+		long totalCount = qnaDAO.boardCount(pager);
+		pager.makePage(totalCount);
 		
-		return qnaDAO.boardList(map);
+		return qnaDAO.boardList(pager);
 	}
 
 	@Override

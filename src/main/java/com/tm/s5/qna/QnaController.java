@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.s5.board.BoardVO;
+import com.tm.s5.board.page.Pager;
 
 @Controller
 @RequestMapping("/qna/**")
@@ -38,13 +38,14 @@ public class QnaController {
 
 	// list(GET)
 	@RequestMapping(value = "qnaList")
-	public ModelAndView boardList(@RequestParam(defaultValue = "1") int curPage, ModelAndView mv) throws Exception {
+	public ModelAndView boardList(Pager pager, ModelAndView mv) throws Exception {
 
-//		System.out.println(perPage);
-//		System.out.println(curPage);
-
-		List<BoardVO> ar = qnaService.boardList(curPage);
+		System.out.println("kind: " +pager.getKind());
+		System.out.println("search : " + pager.getSearch());
+		
+		List<BoardVO> ar = qnaService.boardList(pager);
 		mv.addObject("list", ar);
+		mv.addObject("pager",pager);
 		mv.setViewName("board/boardList");
 
 		return mv;

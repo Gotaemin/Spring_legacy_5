@@ -5,18 +5,26 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tm.s5.AbstractTestCase;
 import com.tm.s5.board.BoardVO;
+import com.tm.s5.board.page.Pager;
 
 public class NoticeDAOTest extends AbstractTestCase{
 
 	@Autowired
 	private NoticeDAO noticeDAO;
+	
+	@Test
+	public void Count(Pager pager) throws Exception{
+		pager.setKind("bt");
+		pager.setSearch("test");
+		long i =  noticeDAO.boardCount(pager);
+		
+	}
 	
 	
 //	@Test
@@ -25,8 +33,8 @@ public class NoticeDAOTest extends AbstractTestCase{
 	}
 	
 //	@Test
-	public void boardListTest(Map<String, Integer> map) throws Exception{
-		List<BoardVO> ar =  noticeDAO.boardList(map);
+	public void boardListTest(Pager pager) throws Exception{
+		List<BoardVO> ar =  noticeDAO.boardList(pager);
 		assertNotEquals(0, ar.size());
 	}
 	
@@ -99,11 +107,11 @@ public class NoticeDAOTest extends AbstractTestCase{
 	}
 	
 //	@Test
-//	public void boardDelete() throws Exception{
-//		int result = noticeDAO.boardDelete(1);
-//		
-//		assertNotEquals(0, result);
-//	}
+	public void boardDelete() throws Exception{
+		int result = noticeDAO.boardDelete(1);
+		
+		assertNotEquals(0, result);
+	}
 
 }
 

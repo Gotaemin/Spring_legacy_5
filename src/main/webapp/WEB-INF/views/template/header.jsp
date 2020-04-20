@@ -18,6 +18,8 @@
 						<li><a href="#">Page 1-3</a></li>
 					</ul></li>
 				<li><a href="${pageContext.request.contextPath }/notice/noticeList">Notice</a></li>
+				<li><a href="${pageContext.request.contextPath }/user/userList">MemberList</a></li>
+				
 				<li><a href="${pageContext.request.contextPath }/bbs/bbsList">BBS</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

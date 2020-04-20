@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tm.s5.board.BoardDAO;
 import com.tm.s5.board.BoardVO;
+import com.tm.s5.board.page.Pager;
 
 @Repository
 public class QnaDAO implements BoardDAO {
@@ -19,13 +20,13 @@ public class QnaDAO implements BoardDAO {
 	
 	
 	@Override
-	public long boardCount() throws Exception {
+	public long boardCount(Pager pager) throws Exception {
 		return sqlsession.selectOne(NAMESPACE+"boardCount");
 	}
 
 	@Override
-	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception {
-		return sqlsession.selectList(NAMESPACE+"boardList",map);
+	public List<BoardVO> boardList(Pager pager) throws Exception {
+		return sqlsession.selectList(NAMESPACE+"boardList",pager);
 	}
 
 	@Override

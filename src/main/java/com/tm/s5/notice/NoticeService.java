@@ -1,14 +1,13 @@
 package com.tm.s5.notice;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tm.s5.board.BoardService;
 import com.tm.s5.board.BoardVO;
+import com.tm.s5.board.page.Pager;
 
 @Service
 public class NoticeService implements BoardService {
@@ -17,26 +16,14 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 	
 	@Override
-	public List<BoardVO> boardList(int curPage) throws Exception {
-		int starRow = (curPage-1)*10+1;
-		int lastRow = curPage * 10;
+	public List<BoardVO> boardList(Pager pager) throws Exception {
+
+		pager.makeRow();
 		
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("startRow", starRow);
-		map.put("lastRow", lastRow);
+		long totalCount = noticeDAO.boardCount(pager);
+		pager.makePage(totalCount);
 		
-		//총글의 개수
-//		long totalCount = noticeDAO.boardCount();
-//		System.out.println(totalCount);
-//		
-//		//총페이지의 개수
-//		long totalPage = totalCount/10;
-//		if(totalCount % 10 != 0) {
-//			totalPage++;
-//		}
-//		System.out.println(totalPage);
-		
-		return noticeDAO.boardList(map);
+		return noticeDAO.boardList(pager);
 	}
 
 	@Override

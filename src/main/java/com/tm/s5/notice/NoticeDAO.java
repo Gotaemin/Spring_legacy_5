@@ -1,7 +1,6 @@
 package com.tm.s5.notice;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tm.s5.board.BoardDAO;
 import com.tm.s5.board.BoardVO;
+import com.tm.s5.board.page.Pager;
 
 @Repository
 public class NoticeDAO implements BoardDAO {
@@ -18,8 +18,8 @@ public class NoticeDAO implements BoardDAO {
 	private final String NAMESPACE = "com.tm.s5.notice.NoticeDAO.";
 
 	@Override
-	public long boardCount() throws Exception {
-		return sqlsession.selectOne(NAMESPACE+"boardCount");
+	public long boardCount(Pager pager) throws Exception {
+		return sqlsession.selectOne(NAMESPACE+"boardCount",pager);
 	}
 	
 	@Override
@@ -38,8 +38,8 @@ public class NoticeDAO implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception {
-		return sqlsession.selectList(NAMESPACE+"boardList",map);
+	public List<BoardVO> boardList(Pager pager) throws Exception {
+		return sqlsession.selectList(NAMESPACE+"boardList",pager);
 	}
 	
 	@Override
