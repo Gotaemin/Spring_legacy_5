@@ -6,9 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tm.s5.board.page.Pager;
 import com.tm.s5.member.MemberDAO;
 import com.tm.s5.member.MemberVO;
+import com.tm.s5.util.Pager;
 
 @Repository
 public class UserDAO implements MemberDAO {
@@ -17,6 +17,8 @@ public class UserDAO implements MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.tm.s5.user.UserDAO.";
+	
+	
 	
 	@Override
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
@@ -34,7 +36,7 @@ public class UserDAO implements MemberDAO {
 	}
 	
 	@Override
-	public long memberJoin(MemberVO memberVO) throws Exception {
+	public int memberJoin(MemberVO memberVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"memberJoin", memberVO);
 	}
 

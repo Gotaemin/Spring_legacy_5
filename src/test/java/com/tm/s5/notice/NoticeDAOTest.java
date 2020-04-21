@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tm.s5.AbstractTestCase;
 import com.tm.s5.board.BoardVO;
-import com.tm.s5.board.page.Pager;
+import com.tm.s5.util.Pager;
 
 public class NoticeDAOTest extends AbstractTestCase{
 

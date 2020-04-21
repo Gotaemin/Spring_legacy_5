@@ -11,11 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		like '%' || #{search} || '%'	
 	</sql>
 
-	<select id="memberLogin" parameterType="com.tm.s5.user.UserVO" resultType="com.tm.s5.user.UserVO">
+	<select id="memberLogin" parameterType="UserVO" resultType="UserVO">
 		select * from userInfo where id=#{id} and pwd=#{pwd}
 	</select>
 	
-	<select id="memberList" parameterType="com.tm.s5.member.memberPage.MemberPager" resultType="com.tm.s5.user.UserVO">
+	<select id="memberList" parameterType="Pager" resultType="UserVO">
 		select * from 
 			(select N.*, rownum R from 
 				(select * from userInfo where 
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<select id="memberCount" parameterType="com.tm.s5.member.memberPage.MemberPager" resultType="java.lang.Long">
+	<select id="memberCount" parameterType="Pager" resultType="Long">
 		select count(id) from userInfo 
 				
 				<where>
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</where>
 	</select>
 	
-	<insert id="memberJoin" parameterType="com.tm.s5.user.UserVO">
+	<insert id="memberJoin" parameterType="UserVO">
 			insert into userInfo values(#{id},#{pwd},#{name},#{phone},#{email})
 	</insert>
 	

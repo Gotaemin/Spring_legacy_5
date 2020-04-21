@@ -17,7 +17,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email">id:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="id"placeholder="Enter id" name="id">
+					<input type="text" class="form-control" id="id"placeholder="Enter id" name="id"  value="${cookie.cId.value}">
 				</div>
 			</div>
 			<div class="form-group">
@@ -26,6 +26,14 @@
 					<input type="password" class="form-control" id="pwd"placeholder="Enter pwd" name="pwd">
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<div class="checkbox">
+      				<label><input type="checkbox" name="remember" value="remember"> Remember me</label>
+    			</div>
+			</div>
+		
+			
 		
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">

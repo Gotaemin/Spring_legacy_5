@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tm.s5.board.BoardDAO;
 import com.tm.s5.board.BoardVO;
-import com.tm.s5.board.page.Pager;
+import com.tm.s5.util.Pager;
 
 @Repository
 public class NoticeDAO implements BoardDAO {

@@ -2,7 +2,7 @@ package com.tm.s5.member;
 
 import java.util.List;
 
-import com.tm.s5.board.page.Pager;
+import com.tm.s5.util.Pager;
 
 public interface MemberService {
 	// login- selectOne

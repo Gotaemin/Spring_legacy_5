@@ -5,15 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tm.s5.board.page.Pager;
 import com.tm.s5.member.MemberService;
 import com.tm.s5.member.MemberVO;
+import com.tm.s5.util.Pager;
 
 @Service
 public class UserService implements MemberService {
 
 	@Autowired
 	private UserDAO userDAO;
+	
+	
+	public int memberJoin(MemberVO memberVO)throws Exception{
+		return userDAO.memberJoin(memberVO);
+	}
 	
 	@Override
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {

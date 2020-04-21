@@ -1,7 +1,6 @@
 package com.tm.s5.qna;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tm.s5.board.BoardDAO;
 import com.tm.s5.board.BoardVO;
-import com.tm.s5.board.page.Pager;
+import com.tm.s5.util.Pager;
 
 @Repository
 public class QnaDAO implements BoardDAO {
@@ -17,7 +16,15 @@ public class QnaDAO implements BoardDAO {
 	@Autowired
 	private SqlSession sqlsession;
 	private final String NAMESPACE = "com.tm.s5.qna.QnaDAO.";
+
 	
+	public int boardReplyUpdate(BoardVO boardVO) throws Exception{
+		return sqlsession.update(NAMESPACE+"boardReplyUpdate", boardVO);
+	}
+	
+	public int boardReply(BoardVO boardVO) throws Exception{
+		return sqlsession.insert(NAMESPACE+"boardReply", boardVO);
+	}
 	
 	@Override
 	public long boardCount(Pager pager) throws Exception {

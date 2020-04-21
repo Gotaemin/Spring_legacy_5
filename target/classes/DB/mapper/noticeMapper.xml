@@ -10,27 +10,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		like '%' || #{search} || '%'
 	</sql>
 
-	<insert id="boardWrite" parameterType="com.tm.s5.notice.NoticeVO">
+	<insert id="boardWrite" parameterType="NoticeVO">
 		insert into notice values(board_seq.nextVal,#{title},#{writer},#{contents},sysdate,0)
 	</insert>
 	
-	<delete id="boardDelete" parameterType="java.lang.Long">
+	<delete id="boardDelete" parameterType="Long">
 		delete from notice where num = #{num}
 	</delete>
 	
-	<update id="boardUpdate" parameterType="com.tm.s5.notice.NoticeVO">
+	<update id="boardUpdate" parameterType="NoticeVO">
 		update notice set title=#{title}, writer=#{writer}, contents=#{contents} where num=#{num}
 	</update>
 	
-	<update id="hitUpdate" parameterType="java.lang.Long">
+	<update id="hitUpdate" parameterType="Long">
 		update notice set hit = hit+1 where num=#{num}
 	</update>
 	
-	<select id="boardSelect" parameterType="java.lang.Long" resultType="com.tm.s5.notice.NoticeVO">
+	<select id="boardSelect" parameterType="Long" resultType="NoticeVO">
 		select * from notice where num=#{num}
 	</select>
 	
-	<select id="boardList" resultType="com.tm.s5.notice.NoticeVO" parameterType="com.tm.s5.board.page.Pager">
+	<select id="boardList" resultType="NoticeVO" parameterType="Pager">
 		select * from 
 			(select N.*, rownum R from 
 				(select * from notice where 
@@ -47,11 +47,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					</otherwise>
 				</choose>
 				
-				<include refid="search"></include> and num>=1 order by num desc)N) 
+				<include refid="search"></include> 
+				and num>=1 order by num desc)N) 
 		where R between #{startRow} and #{lastRow}
 	</select>
 	
-	<select id="boardCount" parameterType="com.tm.s5.board.page.Pager" resultType="java.lang.Long">
+	<select id="boardCount" parameterType="Pager" resultType="Long">
 		select count(num) from notice 
 				
 				<where>

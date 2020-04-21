@@ -47,7 +47,14 @@
 				<c:forEach var="list" items="${list}">
 					<tr>
 						<td>${list.num}</td>
-						<td><a href="./${board}Select?num=${list.num}">${list.title}</a></td>
+						<td>
+							<c:catch>
+								<c:forEach begin="1" end="${list.depth}">
+									--
+								</c:forEach>
+							</c:catch>
+							<a href="./${board}Select?num=${list.num}">${list.title}</a>
+						</td>
 						<td>${list.writer}</td>
 						<td>${list.regdate}</td>
 						<td>${list.hit}</td>
@@ -76,10 +83,40 @@
 			</ul>
 		</div>
 
-
-		<div>
-			<a href="./${board}Write" class="btn btn-primary">Write</a>
-		</div>
+<%-- 		<c:if test="${not empty memberVO}"> --%>
+<%-- 			<c:if test="${board eq 'notice'}"> --%>
+<%-- 				<c:if test="${memberVO.id eq 'admin'}"> --%>
+<!-- 					<div> -->
+<%-- 						<a href="./${board}Write" class="btn btn-primary">Write</a> --%>
+<!-- 					</div> -->
+<%-- 				</c:if> --%>
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${board eq 'qna'}"> --%>
+<!-- 				<div> -->
+<%-- 					<a href="./${board}Write" class="btn btn-primary">Write</a> --%>
+<!-- 				</div> -->
+<%-- 			</c:if> --%>
+<%-- 		</c:if> --%>
+		<c:catch>
+			<c:choose>
+			<c:when test="${board eq 'notice'}">
+				<c:if test="${memberVO.id eq 'admin'}">
+					<div>
+						<a href="./${board}Write" class="btn btn-primary">Write</a>
+					</div>
+				</c:if>
+			</c:when>
+			<c:otherwise>
+				<c:if test="${not empty memberVO}">
+					<div>
+						<a href="./${board}Write" class="btn btn-primary">Write</a>
+					</div>
+				</c:if>
+			</c:otherwise>
+		</c:choose>
+		</c:catch>
+		
+		
 	</div>
 
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tm.s5.AbstractTestCase;
 import com.tm.s5.board.BoardVO;
+import com.tm.s5.util.Pager;
 
 public class QnaDAOTest extends AbstractTestCase {
 
@@ -24,12 +25,22 @@ public class QnaDAOTest extends AbstractTestCase {
 		qnaDAO.boardWrite(qnaVO);
 	}
 	
-	@Test
+//	@Test
 	public void qnaSelect() throws Exception{
-		
 		BoardVO boardVO = qnaDAO.boardSelect(2);
 		
 		assertNotNull(boardVO);
 	}
+	
+	@Test
+	public void qnaList() throws Exception{
+		Pager pager = new Pager();
+		
+		System.out.println("search: "+pager.getSearch());
+		assertNotNull(qnaDAO.boardList(pager));
+		
+	}
+	
+	
 
 }

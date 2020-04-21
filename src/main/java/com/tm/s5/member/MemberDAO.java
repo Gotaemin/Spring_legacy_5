@@ -2,7 +2,7 @@ package com.tm.s5.member;
 
 import java.util.List;
 
-import com.tm.s5.board.page.Pager;
+import com.tm.s5.util.Pager;
 
 public interface MemberDAO {
 
@@ -16,7 +16,7 @@ public interface MemberDAO {
 	public long memberCount(Pager pager) throws Exception; 
 	
 	//insert
-	public long memberJoin(MemberVO memberVO) throws Exception;
+	public int memberJoin(MemberVO memberVO) throws Exception;
 	
 	//update
 	

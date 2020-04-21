@@ -1,4 +1,4 @@
-package com.tm.s5.board.page;
+package com.tm.s5.util;
 
 public class Pager {
 
@@ -55,12 +55,8 @@ public class Pager {
 		if(this.curBlock == this.totalBlock) {
 			this.lastNum = this.totalPage;
 		}
-		
-		
 	}
 	
-	
-
 	
 	public String getKind() {
 		return kind;
@@ -71,7 +67,6 @@ public class Pager {
 	}
 
 	public String getSearch() {
-		
 		if(this.search == null) {
 			this.search = "";
 		}

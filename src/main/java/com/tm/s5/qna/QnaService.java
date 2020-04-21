@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.tm.s5.board.BoardService;
 import com.tm.s5.board.BoardVO;
-import com.tm.s5.board.page.Pager;
+import com.tm.s5.util.Pager;
 
 @Service
 public class QnaService implements BoardService {
@@ -15,9 +15,19 @@ public class QnaService implements BoardService {
 	@Autowired
 	private QnaDAO qnaDAO;
 	
+	public int boardReply(BoardVO boardVO) throws Exception{
+		int result = qnaDAO.boardReplyUpdate(boardVO);
+		result = qnaDAO.boardReply(boardVO);
+		
+		return result;
+	}
+	
+	
+	
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {
 		
+		pager.setSearch("");
 		pager.makeRow();
 		
 		long totalCount = qnaDAO.boardCount(pager);
