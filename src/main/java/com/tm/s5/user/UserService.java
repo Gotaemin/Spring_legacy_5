@@ -26,6 +26,10 @@ public class UserService implements MemberService {
 	@Autowired
 	private FileSaver fileSaver;
 	
+	public int memberUpdate(MemberVO memberVO) throws Exception{
+		return userDAO.memberUpdate(memberVO);
+	}
+	
 	public int fileDelete(String id,HttpSession session) throws Exception{
 		
 		MemberFileVO memberFileVO = memberFileDAO.fileSelect(id);

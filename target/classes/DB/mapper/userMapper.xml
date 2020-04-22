@@ -7,12 +7,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
 <mapper namespace="com.tm.s5.user.UserDAO">
 
+	<resultMap type="UserVO" id="loginResult">
+		<id column="id" property="id"/> 
+		<result column="pwd" property="pwd"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		
+		<!-- 1개인 경우 (1:1)-->
+		<association property="memberFileVO" javaType="MemberFileVO">
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+		</association>
+	</resultMap>
+
 	<sql id="search">
 		like '%' || #{search} || '%'	
 	</sql>
 
-	<select id="memberLogin" parameterType="UserVO" resultType="UserVO">
-		select * from userInfo where id=#{id} and pwd=#{pwd}
+	<select id="memberLogin" parameterType="UserVO" resultMap="loginResult">
+		select M.*,F.filename,F.oriname
+		from userinfo M left join memberfile F
+		on (M.id = F.id)
+		where M.id = #{id} and M.pwd =#{pwd}
 	</select>
 	
 	<select id="memberList" parameterType="Pager" resultType="UserVO">
@@ -62,6 +79,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="memberJoin" parameterType="UserVO">
 			insert into userInfo values(#{id},#{pwd},#{name},#{phone},#{email})
 	</insert>
+	
+	<update id="memberUpdate" parameterType="UserVO">
+			update member set name=#{name}, email=#{email}, phone=#{phone}, age=#{age} where id=#{id} 
+	</update>
 	
 
 </mapper>

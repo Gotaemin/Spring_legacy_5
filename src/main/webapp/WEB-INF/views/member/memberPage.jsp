@@ -19,7 +19,7 @@
 		<h1>Email : ${memberVO.email}</h1>
 		<h1>Phone : ${memberVO.phone}</h1>
 		<div><a href="./fileDelete?id=${sessionScope.memberVO.id}">FileDelete</a> </div>
-		<h1><img alt="" src="../resources/memberUpload/${file.fileName}"> </h1>
+		<h1><img alt="file" src="../resources/memberUpload/${memberVO.memberFileVO.fileName}"> </h1>
 		<button class="btn btn-primary" id="update">Update</button>
 		<button class="btn btn-danger" id="del">Delete</button>
 	</div>
@@ -30,7 +30,7 @@
 	//js  document.querySelector
 	//jquery $(선택자)
 	$("#update").on("click", function() {
-		location.href="./memberUpdate";
+		location.href="./userUpdate";
 	});
 	
 	$("#del").click(function() {

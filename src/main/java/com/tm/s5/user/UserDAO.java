@@ -18,7 +18,9 @@ public class UserDAO implements MemberDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.tm.s5.user.UserDAO.";
 	
-	
+	public int memberUpdate(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"memberUpdate", memberVO);
+	}
 	
 	@Override
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {

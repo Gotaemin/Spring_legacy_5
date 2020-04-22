@@ -131,6 +131,28 @@ public class UserController {
 	//delete
 	
 	//update
+	@RequestMapping(value= "userUpdate")
+	public String memberUpdate() {
+		return "member/memberUpdate";
+	}
+	@RequestMapping(value= "memberUpdate", method = RequestMethod.POST)
+	public ModelAndView memberUpdate(ModelAndView mv, MemberVO memberVO, HttpSession session) throws Exception {
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		memberVO.setId(id);
+		
+		int result = userService.memberUpdate(memberVO);
+		
+		if(result>0) {
+			session.setAttribute("member", memberVO);
+			mv.setViewName("redirect:./memberPage");
+		}else {
+			 mv.addObject("result", "Update Fail");
+			 mv.addObject("path", "./memberPage");
+			 mv.setViewName("common/result");
+		}
+		
+		return mv;
+	}
 	
 	
 }
