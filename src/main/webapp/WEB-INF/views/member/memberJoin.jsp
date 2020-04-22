@@ -59,7 +59,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="pic">Avatar:</label>
 					<div class="col-sm-10">
-						<input type="file" class="form-control" id="Avatar" placeholder="Enter Avatar" name="Avatar">
+						<input type="file" class="form-control" id="Avatar" placeholder="Enter Avatar" name="avatar">
 					</div>
 				</div>	
 						

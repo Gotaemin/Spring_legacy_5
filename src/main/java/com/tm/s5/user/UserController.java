@@ -11,12 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.s5.member.MemberVO;
+import com.tm.s5.member.memberFile.MemberFileVO;
 import com.tm.s5.util.Pager;
 
 @Controller
@@ -31,6 +32,16 @@ public class UserController {
 	public String getMember() throws Exception{
 		return "user";
 	}
+	
+	@RequestMapping(value = "fileDelete")
+	public String fileDelete(String id,HttpSession session) throws Exception{
+		System.out.println("fileDelete");
+		
+		int result = userService.fileDelete(id,session);
+		
+		return "redirect:./userPage";
+	}
+	
 	
 	//List
 	@RequestMapping(value = "userList")
@@ -89,9 +100,9 @@ public class UserController {
 		return "member/memberJoin"; 
 	}
 	@RequestMapping(value= "userJoin", method = RequestMethod.POST)
-	public ModelAndView memberJoin(MemberVO memberVO, String avatar, ModelAndView mv) throws Exception {
-		System.out.println("avatar : "+avatar);
-		int result = userService.memberJoin(memberVO);
+	public ModelAndView memberJoin(MemberVO memberVO, MultipartFile avatar,HttpSession session, ModelAndView mv) throws Exception {
+
+		int result = userService.memberJoin(memberVO,avatar,session);
 		
 		String msg ="Member Join Fail";
 		if(result>0) {
@@ -104,6 +115,19 @@ public class UserController {
 		
 		return mv;
 	}
+	
+	//Page
+	@RequestMapping(value= "userPage")
+	public String memberPage(HttpSession session,Model model) throws Exception {
+		
+		MemberVO memberVO =  (MemberVO)session.getAttribute("memberVO");
+
+		MemberFileVO memberFileVO = userService.fileSelect(memberVO.getId());
+		model.addAttribute("file", memberFileVO);
+		
+		return "member/memberPage";
+	}
+	
 	//delete
 	
 	//update
