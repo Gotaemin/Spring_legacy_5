@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/summer.jsp"></c:import>
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,7 +32,7 @@
 				<div class="form-group">
 				<label class="control-label col-sm-2" for="contents">contents:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="contents"placeholder="Enter contents" name="contents" value="${boardVO.contents}">
+					<textarea id="contents" class="form-control" rows="5" cols="80" name="contents" placeholder="Enter contents">${boardVO.contents}</textarea>
 				</div>
 			</div>
 		
@@ -42,6 +43,12 @@
 			</div>
 		</form>
 	</div>
+
+<script type="text/javascript">
+	$("#contents").summernote({
+		height:400
+	});
+</script>
 
 </body>
 </html>

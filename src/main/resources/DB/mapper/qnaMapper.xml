@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<insert id="boardReply" parameterType="QnaVO">
-		insert into qna values(qna_seq.nextVal,#{title},#{writer},#{contents},sysdate,0,
+		insert into qna values(board_seq.nextVal,#{title},#{writer},#{contents},sysdate,0,
 		(select ref from qna where num=#{num}),
 		(select step from qna where num=#{num})+1,
 		(select depth from qna where num=#{num})+1
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="boardWrite" parameterType="QnaVO">
 		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
-			select qna_seq.nextVal from dual
+			select board_seq.nextVal from dual
 		</selectKey>
 	
 		insert into qna values(#{num},#{title},#{writer},#{contents},sysdate,0,

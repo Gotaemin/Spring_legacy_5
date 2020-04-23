@@ -37,8 +37,11 @@ public class FileSaver {
 		}
 
 		// 2.파일명 생성
-		String fileName = this.makeNameByTime(file.getOriginalFilename());
+		String fileName = this.makeNameByUUID(file.getOriginalFilename());
 
+		System.out.println("fileSaverfileName:"+fileName);
+		
+		
 		// 3.HDD에 저장
 		// 방법1.FileCopyUtils
 		f = new File(f, fileName);
@@ -89,13 +92,14 @@ public class FileSaver {
 		Calendar cal = Calendar.getInstance();
 		Long l = cal.getTimeInMillis();
 
-		String[] names = name.split("\\.");
-		name = names[0] + "_" + l + "." + names[1];
-
-//		String result = name.substring(0,name.lastIndexOf("."));
-//		result = result + "_" + l;
-//		result = result + name.substring(name.lastIndexOf("."));
-//		System.out.println(result);
+//		String[] names = name.split("\\.");
+//		name = names[0] + "_" + l + "." + names[1];
+		
+		System.out.println(name);
+		String result = name.substring(0,name.lastIndexOf("."));
+		result = result + "_" + l;
+		result = result + name.substring(name.lastIndexOf("."));
+		System.out.println(result);
 
 		return name;
 	}

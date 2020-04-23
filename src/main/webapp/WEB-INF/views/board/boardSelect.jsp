@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/summer.jsp"></c:import>
 <title>Insert title here</title>
 </head>
 <body>
@@ -18,6 +19,12 @@
 	<p>writer : ${list.writer }</p>
 	<p>Contents : ${list.contents}</p>
 </div>
+
+<c:forEach var="file" items="${list.boardFileVOs}">
+	<div>
+		<a href="../boardFile/fileDown?fnum=${file.fnum}&board=${file.board}">${file.oriName}</a>
+	</div>
+</c:forEach>
 
 
 <div>

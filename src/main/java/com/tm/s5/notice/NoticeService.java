@@ -52,22 +52,28 @@ public class NoticeService implements BoardService {
 		System.out.println(path);
 		
 		boardVO.setNum(noticeDAO.boardNum());
-		int result = noticeDAO.boardWrite(boardVO);
 		
+		System.out.println("noticeService getNum: "+noticeDAO.boardNum()); //여기까지 됨
+		
+		int result = noticeDAO.boardWrite(boardVO);
+		System.out.println(files.length);
 		
 		for (MultipartFile file : files) {
 			BoardFileVO boardFileVO = new BoardFileVO();
 			String fileName = fileSaver.saveByUtils(file, path);
+			
+			System.out.println("boardWrite Servcie: fileName: "+fileName);
 			
 			boardFileVO.setNum(boardVO.getNum());
 			boardFileVO.setFileName(fileName);
 			boardFileVO.setOriName(file.getOriginalFilename());
 			boardFileVO.setBoard(1);
 			
-			boardFileDAO.fileInsert(boardFileVO);
+			result= boardFileDAO.fileInsert(boardFileVO);
 //			System.out.println(fileName);
 		}
 		
+//		return 0;
 		return result;
 	}
 

@@ -6,6 +6,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
 <mapper namespace="com.tm.s5.notice.NoticeDAO">
 
+	<resultMap type="NoticeVO" id="selectResult">
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		<result column="regdate" property="regdate"/>
+		<result column="hit" property="hit"/>
+
+		<collection property="boardFileVOs" javaType="List" ofType="BoardFileVO">
+			<id column="fnum" property="fnum"/>
+			<result column="fileName" property="fileName"/>
+			<result column="oriName" property="oriName"/>
+			<result column="board" property="board"/>
+		</collection>		
+	</resultMap>
+
 	<sql id="search">
 		like '%' || #{search} || '%'
 	</sql>
@@ -31,8 +47,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update notice set hit = hit+1 where num=#{num}
 	</update>
 	
-	<select id="boardSelect" parameterType="Long" resultType="NoticeVO">
-		select * from notice where num=#{num}
+	<select id="boardSelect" parameterType="Long" resultMap="selectResult">
+		select N.*,F.fnum,F.fileName,F.oriName,F.board
+		from notice N left join boardfile F
+		on(N.num = F.num)
+		where N.num = #{num} and F.board=1
 	</select>
 	
 	<select id="boardList" resultType="NoticeVO" parameterType="Pager">
