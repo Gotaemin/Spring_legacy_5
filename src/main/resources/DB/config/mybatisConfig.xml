@@ -16,6 +16,8 @@
 		
 		<typeAlias type="com.tm.s5.qna.QnaVO" alias="QnaVO"/>
 		<typeAlias type="com.tm.s5.member.memberFile.MemberFileVO" alias="MemberFileVO"/>
+		
+		<typeAlias type="com.tm.s5.board.file.BoardFileVO" alias="BoardFileVO"/>
  		
  	</typeAliases>
  

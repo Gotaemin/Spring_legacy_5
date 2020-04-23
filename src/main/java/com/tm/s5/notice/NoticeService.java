@@ -2,11 +2,17 @@ package com.tm.s5.notice;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tm.s5.board.BoardService;
 import com.tm.s5.board.BoardVO;
+import com.tm.s5.board.file.BoardFileDAO;
+import com.tm.s5.board.file.BoardFileVO;
+import com.tm.s5.util.FileSaver;
 import com.tm.s5.util.Pager;
 
 @Service
@@ -14,6 +20,14 @@ public class NoticeService implements BoardService {
 
 	@Autowired
 	private NoticeDAO noticeDAO;
+	@Autowired
+	private BoardFileDAO boardFileDAO;
+	
+	@Autowired
+	private FileSaver fileSaver;
+	
+	@Autowired
+	private ServletContext servletContext;
 	
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {
@@ -33,8 +47,28 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int boardWrite(BoardVO boardVO) throws Exception {
-		return noticeDAO.boardWrite(boardVO);
+	public int boardWrite(BoardVO boardVO,MultipartFile[] files) throws Exception {
+		String path = servletContext.getRealPath("/resources/Upload/notice");
+		System.out.println(path);
+		
+		boardVO.setNum(noticeDAO.boardNum());
+		int result = noticeDAO.boardWrite(boardVO);
+		
+		
+		for (MultipartFile file : files) {
+			BoardFileVO boardFileVO = new BoardFileVO();
+			String fileName = fileSaver.saveByUtils(file, path);
+			
+			boardFileVO.setNum(boardVO.getNum());
+			boardFileVO.setFileName(fileName);
+			boardFileVO.setOriName(file.getOriginalFilename());
+			boardFileVO.setBoard(1);
+			
+			boardFileDAO.fileInsert(boardFileVO);
+//			System.out.println(fileName);
+		}
+		
+		return result;
 	}
 
 	@Override

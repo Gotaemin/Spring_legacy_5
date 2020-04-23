@@ -24,6 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</update>
 	
+	
+	
 	<insert id="boardReply" parameterType="QnaVO">
 		insert into qna values(qna_seq.nextVal,#{title},#{writer},#{contents},sysdate,0,
 		(select ref from qna where num=#{num}),
@@ -33,10 +35,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</insert>
 	
+	
 
 	<insert id="boardWrite" parameterType="QnaVO">
-		insert into qna values(qna_seq.nextVal,#{title},#{writer},#{contents},sysdate,0,
-		qna_seq.currVal,
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			select qna_seq.nextVal from dual
+		</selectKey>
+	
+		insert into qna values(#{num},#{title},#{writer},#{contents},sysdate,0,
+		#{num},
 		0,
 		0)	
 	</insert>

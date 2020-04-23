@@ -13,7 +13,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 
 	<div class="container">
-		<form class="form-horizontal" action="./${board}Write" method="post">
+		<form class="form-horizontal" action="./${board}Write" method="post"  enctype="multipart/form-data" >
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email">title:</label>
 				<div class="col-sm-10">
@@ -32,6 +32,15 @@
 					<input type="text" class="form-control" id="contents"placeholder="Enter contents" name="contents">
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="files">files:</label>
+				<div class="col-sm-10">
+					<input type="file" class="form-control" name="files">
+					<input type="file" class="form-control" name="files">
+				</div>
+			</div>
+		
+		
 		
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">

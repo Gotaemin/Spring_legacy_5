@@ -10,8 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		like '%' || #{search} || '%'
 	</sql>
 
+	<select id="boardNum" resultType="Long">
+		select board_seq.nextVal from dual
+	</select>
+
+
 	<insert id="boardWrite" parameterType="NoticeVO">
-		insert into notice values(board_seq.nextVal,#{title},#{writer},#{contents},sysdate,0)
+		insert into notice values(#{num},#{title},#{writer},#{contents},sysdate,0)
 	</insert>
 	
 	<delete id="boardDelete" parameterType="Long">

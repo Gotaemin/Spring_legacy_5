@@ -83,20 +83,8 @@
 			</ul>
 		</div>
 
-<%-- 		<c:if test="${not empty memberVO}"> --%>
-<%-- 			<c:if test="${board eq 'notice'}"> --%>
-<%-- 				<c:if test="${memberVO.id eq 'admin'}"> --%>
-<!-- 					<div> -->
-<%-- 						<a href="./${board}Write" class="btn btn-primary">Write</a> --%>
-<!-- 					</div> -->
-<%-- 				</c:if> --%>
-<%-- 			</c:if> --%>
-<%-- 			<c:if test="${board eq 'qna'}"> --%>
-<!-- 				<div> -->
-<%-- 					<a href="./${board}Write" class="btn btn-primary">Write</a> --%>
-<!-- 				</div> -->
-<%-- 			</c:if> --%>
-<%-- 		</c:if> --%>
+
+		<a href="./${board}Write" class="btn btn-primary">Write</a>
 		<c:catch>
 			<c:choose>
 			<c:when test="${board eq 'notice'}">

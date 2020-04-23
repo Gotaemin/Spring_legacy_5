@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.s5.board.BoardVO;
@@ -129,9 +130,10 @@ public class QnaController {
 	}
 
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
-	public ModelAndView boardWrite(QnaVO qnaVO,ModelAndView mv) throws Exception{
+	public ModelAndView boardWrite(QnaVO qnaVO,ModelAndView mv,MultipartFile[] files) throws Exception{
 		
-		int result = qnaService.boardWrite(qnaVO);
+		int result = qnaService.boardWrite(qnaVO,files);
+		
 		if(result>0) {
 			mv.addObject("msg", "성공");
 		}else {
