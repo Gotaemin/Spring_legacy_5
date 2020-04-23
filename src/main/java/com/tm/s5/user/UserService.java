@@ -43,9 +43,9 @@ public class UserService implements MemberService {
 		return result;
 	}
 	
-	public MemberFileVO fileSelect(String id) throws Exception{
-		return memberFileDAO.fileSelect(id);
-	}
+//	public MemberFileVO fileSelect(String id) throws Exception{
+//		return memberFileDAO.fileSelect(id);
+//	}
 	
 	public int memberJoin(MemberVO memberVO,MultipartFile avatar,HttpSession session)throws Exception{
 		//HDD에 저장 위치 설정 (시작은 무조건 /resources/images/memberUpload)0

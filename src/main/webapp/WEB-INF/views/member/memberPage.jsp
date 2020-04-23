@@ -7,13 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
-</head>
+</head> 
 <body>
 <c:import url="../template/header.jsp"></c:import>
 
 <div class="container">
 	<div class="row">
-	
 		<h1>Id : ${sessionScope.memberVO.id}</h1>
 		<h1>Name : ${memberVO.name}</h1>
 		<h1>Email : ${memberVO.email}</h1>

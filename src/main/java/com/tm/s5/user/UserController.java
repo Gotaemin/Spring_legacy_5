@@ -120,10 +120,6 @@ public class UserController {
 	@RequestMapping(value= "userPage")
 	public String memberPage(HttpSession session,Model model) throws Exception {
 		
-		MemberVO memberVO =  (MemberVO)session.getAttribute("memberVO");
-
-		MemberFileVO memberFileVO = userService.fileSelect(memberVO.getId());
-		model.addAttribute("file", memberFileVO);
 		
 		return "member/memberPage";
 	}
