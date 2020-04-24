@@ -14,7 +14,7 @@
 	<c:import url="../template/header.jsp"></c:import>
 
 	<div class="container">
-		<form class="form-horizontal" action="./${board}Write" method="post"  enctype="multipart/form-data" >
+		<form class="form-horizontal" id="frm" action="./${board}Write" method="post"  enctype="multipart/form-data" >
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email">title:</label>
 				<div class="col-sm-10">
@@ -24,7 +24,7 @@
 				<div class="form-group">
 				<label class="control-label col-sm-2" for="email">writer:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="writer"placeholder="Enter writer" name="writer">
+					<input type="text" class="form-control" id="writer"placeholder="Enter writer" name="writer" value="${memberVO.id}" readonly="readonly" >
 				</div>
 			</div>
 				<div class="form-group">
@@ -34,28 +34,20 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="files">files:</label>
-				<div class="col-sm-10">
-					<input type="file" class="form-control" name="files">
-					<input type="file" class="form-control" name="files">
+				<label class="control-label col-sm-2" for="files"></label>
+				<div id="addfile" class="col-sm-10">
+					<input type="button" id="add" class=" btn btn-info" value="AddFile">
 				</div>
 			</div>
 		
-		
-		
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">Submit</button>
+					<input type="button" id="btn" value="submit" class="btn btn-default">
 				</div>
 			</div>
 		</form>
 	</div>
-
-<script type="text/javascript">
-	$("#contents").summernote({
-		height: 400
-	});
-</script>
+<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 
 </body>
 </html>

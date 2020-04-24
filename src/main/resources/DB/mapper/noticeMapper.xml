@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select N.*,F.fnum,F.fileName,F.oriName,F.board
 		from notice N left join boardfile F
 		on(N.num = F.num)
-		where N.num = #{num} and F.board=1
+		where N.num = #{num} 
 	</select>
 	
 	<select id="boardList" resultType="NoticeVO" parameterType="Pager">
@@ -60,14 +60,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				(select * from notice where 
 				
 				<choose>
-					<when test="kind == 'bw'">
-						writer
+					<when test="kind == 'bc'">
+						contents
 					</when>
 					<when test="kind == 'bt'">
 						title 
 					</when>
 					<otherwise>
-						contents 
+						 writer
 					</otherwise>
 				</choose>
 				

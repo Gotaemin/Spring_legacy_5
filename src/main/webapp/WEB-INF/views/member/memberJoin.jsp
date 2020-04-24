@@ -73,8 +73,32 @@
 
 		</div>
 	</div>
-
-
+a
+<script type="text/javascript">
+	$("#id").blur(function() {
+		
+		var id = $("#id").val();
+		
+		if(id != ""){
+			$.post("./memberIdCheck",{id:id},function(result){
+				result = result.trim();
+				
+				if(result == 0){
+					alert("이미 아이디가 존재합니다.");
+				}else{
+					alert("사용가능한 아이디 입니다.");
+				}
+			});
+		}else{
+			alert("아이디를 입력해주세요");
+		}
+		
+		
+		
+		
+	});
+	
+</script>
 
 
 

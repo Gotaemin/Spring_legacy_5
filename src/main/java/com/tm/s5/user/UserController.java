@@ -11,13 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tm.s5.member.MemberVO;
-import com.tm.s5.member.memberFile.MemberFileVO;
 import com.tm.s5.util.Pager;
 
 @Controller
@@ -37,9 +37,23 @@ public class UserController {
 	public String fileDelete(String id,HttpSession session) throws Exception{
 		System.out.println("fileDelete");
 		
-		int result = userService.fileDelete(id,session);
+		userService.fileDelete(id,session);
 		
 		return "redirect:./userPage";
+	}
+	
+	@PostMapping("memberIdCheck")
+	public String memberIdCheck(String id,Model model) throws Exception{
+		
+		UserVO userVO = userService.memberIdCheck(id);
+		int result = 1;
+		if(userVO != null) {  //0:아이디 존재  1:아이디 없음
+			result = 0;
+		}
+		
+		model.addAttribute("result", result);
+		
+		return "member/memberIdCheck";
 	}
 	
 	
@@ -78,6 +92,8 @@ public class UserController {
 		memberVO = userService.memberLogin(memberVO);
 		if(memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
+			
+			System.out.println(memberVO.getId());
 		}else {
 			return "member/memberLogin";
 		}

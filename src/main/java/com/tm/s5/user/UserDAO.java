@@ -22,6 +22,10 @@ public class UserDAO implements MemberDAO {
 		return sqlSession.update(NAMESPACE+"memberUpdate", memberVO);
 	}
 	
+	public UserVO memberIdCheck(String id) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"memberIdCheck", id);
+	}
+	
 	@Override
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"memberLogin", memberVO);

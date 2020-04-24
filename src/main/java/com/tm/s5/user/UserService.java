@@ -26,6 +26,11 @@ public class UserService implements MemberService {
 	@Autowired
 	private FileSaver fileSaver;
 	
+	public UserVO memberIdCheck(String id) throws Exception{
+		return userDAO.memberIdCheck(id);
+	}
+	
+	
 	public int memberUpdate(MemberVO memberVO) throws Exception{
 		return userDAO.memberUpdate(memberVO);
 	}

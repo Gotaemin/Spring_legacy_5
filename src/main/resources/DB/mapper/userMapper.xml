@@ -24,6 +24,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="search">
 		like '%' || #{search} || '%'	
 	</sql>
+	
+	<select id="memberIdCheck" parameterType="String" resultType="UserVO">
+		select * from userinfo where id=#{id}
+	</select>
 
 	<select id="memberLogin" parameterType="UserVO" resultMap="loginResult">
 		select M.*,F.filename,F.oriname

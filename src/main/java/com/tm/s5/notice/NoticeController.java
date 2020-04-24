@@ -2,6 +2,8 @@ package com.tm.s5.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -101,11 +103,18 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeWrite",method = RequestMethod.POST)
-	public ModelAndView boardWrite(BoardVO boardVO,ModelAndView mv,MultipartFile[] files) throws Exception{
+	public ModelAndView boardWrite(HttpServletRequest request, BoardVO boardVO,ModelAndView mv,MultipartFile[] files) throws Exception{
+		
+//		Enumeration<String> enumeration = request.getParameterNames();
+//		while (enumeration.hasMoreElements()) {
+//			String str = (String) enumeration.nextElement();
+//			System.out.println(str);
+//		}
 		
 		int result = noticeService.boardWrite(boardVO,files);
 		System.out.println("result Insert :"+result);
 		
+//		int result  = 1;
 		if(result>0) {
 			
 			

@@ -27,7 +27,7 @@ public class QnaService implements BoardService {
 	@Autowired
 	private FileSaver fileSaver;
 	
-	@Autowired
+//	@Autowired
 	private ServletContext servletContext;
 	
 	
