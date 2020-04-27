@@ -85,8 +85,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<update id="memberUpdate" parameterType="UserVO">
-			update member set name=#{name}, email=#{email}, phone=#{phone}, age=#{age} where id=#{id} 
+			update userInfo set name=#{name}, email=#{email}, phone=#{phone}, age=#{age} where id=#{id} 
 	</update>
 	
+	<delete id="memberDelete" parameterType="UserVO">delete userinfo where id=#{id} </delete>
+	
+	<delete id="memberDeletes" parameterType="List">
+		delete userinfo where id in
+		<foreach item="id" collection="list" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

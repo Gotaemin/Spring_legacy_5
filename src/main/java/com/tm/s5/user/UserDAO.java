@@ -18,6 +18,15 @@ public class UserDAO implements MemberDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.tm.s5.user.UserDAO.";
 	
+	public int memberDeletes(List<String> list) throws Exception{
+		int result = sqlSession.delete(NAMESPACE+"memberDeletes", list);
+		return result;
+	}
+	
+	public int memberDelete(UserVO userVO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"memberDelete",userVO);
+	}
+	
 	public int memberUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"memberUpdate", memberVO);
 	}
@@ -45,5 +54,7 @@ public class UserDAO implements MemberDAO {
 	public int memberJoin(MemberVO memberVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"memberJoin", memberVO);
 	}
+
+	
 
 }

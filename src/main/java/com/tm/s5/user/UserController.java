@@ -1,5 +1,7 @@
 package com.tm.s5.user;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,35 @@ public class UserController {
 	public String getMember() throws Exception{
 		return "user";
 	}
+	
+	
+	@GetMapping("userDeletes")
+	public ModelAndView memberDeletes(String[] ids) throws Exception{
+		//배열을 리스트로 변환
+		ModelAndView mv = new ModelAndView();
+	
+		List<String> list = Arrays.asList(ids);
+		
+		int result = userService.memberDeletes(list);
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
+	}
+	
+	@GetMapping("userLists")
+	public ModelAndView memberLists(Pager pager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		List<MemberVO> ar = userService.memberList(pager);
+		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("member/memberLists");
+		
+		return mv;
+	}
+	
 	
 	@RequestMapping(value = "fileDelete")
 	public String fileDelete(String id,HttpSession session) throws Exception{

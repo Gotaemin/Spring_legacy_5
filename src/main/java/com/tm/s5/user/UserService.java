@@ -26,6 +26,15 @@ public class UserService implements MemberService {
 	@Autowired
 	private FileSaver fileSaver;
 	
+	
+	public int memberDeletes(List<String> list) throws Exception{
+		return userDAO.memberDeletes(list);
+	}
+	
+	public int memberDelete(UserVO userVO) throws Exception{
+		return userDAO.memberDelete(userVO);
+	}
+	
 	public UserVO memberIdCheck(String id) throws Exception{
 		return userDAO.memberIdCheck(id);
 	}
@@ -77,7 +86,6 @@ public class UserService implements MemberService {
 
 	@Override
 	public List<MemberVO> memberList(Pager pager) throws Exception {
-		
 		pager.makeRow();
 		
 		long totalCount = userDAO.memberCount(pager);
@@ -86,6 +94,9 @@ public class UserService implements MemberService {
 		
 		return userDAO.memberList(pager);
 	}
+
+
+	
 	
 	
 	
