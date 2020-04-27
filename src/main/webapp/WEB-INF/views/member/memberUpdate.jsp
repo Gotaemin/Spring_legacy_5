@@ -15,10 +15,6 @@
 	<div class="container">
 		<div class="row">
 			<form class="form-horizontal" action="./userUpdate" method="post">
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="id">Image:</label>
-					<input type="file" class="form-control" value="${memberVO.id}" id="pic" name=""pic"">
-				</div>
 			
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="id">ID:</label>
@@ -47,7 +43,11 @@
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="phone" value="${memberVO.phone}" placeholder="Enter Phone" name="phone">
 					</div>
-				</div>		
+				</div>	
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id">avatar:</label>
+					<input type="file" class="form-control" id="avatar" name="avatar">
+				</div>
 				
 						
 				

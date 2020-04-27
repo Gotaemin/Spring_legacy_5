@@ -12,14 +12,14 @@
 var count = 0;
 
 $("#addfile").on("click",".remove", function() {
-	$(this).parent().empty();
+	$(this).parent().remove();
 	count--;
 });
 
 	
 $("#add").click(function() {
 	if(count < 5 ){
-		$("#addfile").append('<div class="all"><input class="form-control files" type="file"/><i class="glyphicon glyphicon-remove remove"></i></div>');
+		$("#addfile").append('<div class="all"><input name="files" class="form-control files" type="file"/><i class="glyphicon glyphicon-remove remove"></i></div>');
 		count++;
 	}else{
 		alert("파일은 5개까지 가능합니다.")
@@ -72,7 +72,7 @@ $("#btn").click(function() {
 
 });
 
-$("#contents").summernote({
-	height: 400,
-	minHeight:400
-});
+//$("#contents").summernote({
+//	height: 400,
+//	minHeight:400
+//});

@@ -26,7 +26,7 @@ public class NoticeService implements BoardService {
 	@Autowired
 	private FileSaver fileSaver;
 	
-//	@Autowired
+	@Autowired
 	private ServletContext servletContext;
 	
 	@Override
@@ -53,27 +53,31 @@ public class NoticeService implements BoardService {
 		
 		boardVO.setNum(noticeDAO.boardNum());
 		
-		System.out.println("noticeService getNum: "+noticeDAO.boardNum()); //여기까지 됨
+		System.out.println("getNum: "+boardVO.getNum()); //여기까지 됨
 		
 		int result = noticeDAO.boardWrite(boardVO);
-		System.out.println(files.length);
+		System.out.println("file len: "+files.length);
 		
 		for (MultipartFile file : files) {
-			BoardFileVO boardFileVO = new BoardFileVO();
-			String fileName = fileSaver.saveByUtils(file, path);
 			
-			System.out.println("boardWrite Servcie: fileName: "+fileName);
+			if(file.getSize()>0) {
+				BoardFileVO boardFileVO = new BoardFileVO();
+				
+				System.out.println("file: "+file.getOriginalFilename());
+				String fileName = fileSaver.saveByUtils(file, path);
+				
+				boardFileVO.setNum(boardVO.getNum());
+				boardFileVO.setFileName(fileName);
+				boardFileVO.setOriName(file.getOriginalFilename());
+				System.out.println("oriName : "+ boardFileVO.getOriName());
+				boardFileVO.setBoard(1);
+				
+				result= boardFileDAO.fileInsert(boardFileVO);
+			}
 			
-			boardFileVO.setNum(boardVO.getNum());
-			boardFileVO.setFileName(fileName);
-			boardFileVO.setOriName(file.getOriginalFilename());
-			boardFileVO.setBoard(1);
-			
-			result= boardFileDAO.fileInsert(boardFileVO);
 //			System.out.println(fileName);
 		}
 		
-//		return 0;
 		return result;
 	}
 

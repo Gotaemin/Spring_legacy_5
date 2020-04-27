@@ -11,6 +11,9 @@ public class BoardFileDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.tm.s5.board.file.BoardFileDAO.";
 	
+	public int fileDelete(Long fnum) throws Exception{
+		return sqlSession.delete(NAMESPACE+"fileDelete", fnum);
+	}
 	
 	public BoardFileVO fileSelect(BoardFileVO boardFileVO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"fileSelect", boardFileVO);

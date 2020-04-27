@@ -31,7 +31,6 @@ public class NoticeController {
 	@RequestMapping(value = "noticeDelete")
 	public ModelAndView boardDelete(long num,ModelAndView mv) throws Exception{
 		int result = noticeService.boardDelete(num);
-		
 		if(result > 0) {
 			mv.setViewName("redirect:./noticeList");
 		}else {
@@ -110,6 +109,9 @@ public class NoticeController {
 //			String str = (String) enumeration.nextElement();
 //			System.out.println(str);
 //		}
+		
+		System.out.println("files : "+files);
+		
 		
 		int result = noticeService.boardWrite(boardVO,files);
 		System.out.println("result Insert :"+result);
