@@ -69,11 +69,11 @@ public class UserService implements MemberService {
 		String fileName = fileSaver.saveByUtils(avatar,path);
 
 		int result = userDAO.memberJoin(memberVO);
+		
 		MemberFileVO memberFileVO = new MemberFileVO();
 		memberFileVO.setId(memberVO.getId());
 		memberFileVO.setFileName(fileName);
 		memberFileVO.setOriName(avatar.getOriginalFilename());
-		
 		result = memberFileDAO.fileInsert(memberFileVO);
 		
 		return result;

@@ -37,13 +37,8 @@ public class FileSaver {
 		}
 
 		// 2.파일명 생성
-		System.out.println("saveutil file: "+file);
-		System.out.println("saveutil oriname: "+file.getOriginalFilename());
 		String fileName = this.makeNameByUUID(file.getOriginalFilename());
 
-		System.out.println("fileSaverfileName:"+fileName);
-		
-		
 		// 3.HDD에 저장
 		// 방법1.FileCopyUtils
 		f = new File(f, fileName);
