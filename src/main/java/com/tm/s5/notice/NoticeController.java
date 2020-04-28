@@ -44,7 +44,6 @@ public class NoticeController {
 	
 	@RequestMapping(value = "noticeUpdate")
 	public ModelAndView boardUpdate(long num,ModelAndView mv) throws Exception{
-		
 		BoardVO boardVO = noticeService.boardSelect(num);
 		
 		mv.addObject("boardVO", boardVO);
@@ -53,11 +52,13 @@ public class NoticeController {
 		return mv;
 	}
 	@RequestMapping(value = "noticeUpdate",method = RequestMethod.POST)
-	public ModelAndView boardUpdate2(BoardVO boardVO, ModelAndView mv) throws Exception{
-		System.out.println("here");
-		int result = noticeService.boardUpdate(boardVO);
+	public ModelAndView boardUpdate2(BoardVO boardVO, ModelAndView mv,MultipartFile[] files) throws Exception{
 		
-		System.out.println(boardVO.getNum());
+//		for (MultipartFile file : files) {
+//			System.out.println(file.getOriginalFilename());
+//		}
+		
+		int result = noticeService.boardUpdate(boardVO,files);
 		if(result > 0) {
 			mv.setViewName("redirect:./noticeSelect?num="+boardVO.getNum());
 		}else {

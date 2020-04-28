@@ -1,5 +1,6 @@
 package com.tm.s5.notice;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -22,21 +23,21 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private BoardFileDAO boardFileDAO;
-	
+
 	@Autowired
 	private FileSaver fileSaver;
-	
+
 	@Autowired
 	private ServletContext servletContext;
-	
+
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {
 
 		pager.makeRow();
-		
+
 		long totalCount = noticeDAO.boardCount(pager);
 		pager.makePage(totalCount);
-		
+
 		return noticeDAO.boardList(pager);
 	}
 
@@ -47,48 +48,81 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int boardWrite(BoardVO boardVO,MultipartFile[] files) throws Exception {
-		String path = servletContext.getRealPath("/resources/Upload/notice");
+	public int boardWrite(BoardVO boardVO, MultipartFile[] files) throws Exception {
+		String path = servletContext.getRealPath("/resources/upload/notice");
 		System.out.println(path);
-		
+
 		boardVO.setNum(noticeDAO.boardNum());
-		
-		System.out.println("getNum: "+boardVO.getNum()); //여기까지 됨
-		
+
+		System.out.println("getNum: " + boardVO.getNum()); // 여기까지 됨
+
 		int result = noticeDAO.boardWrite(boardVO);
-		System.out.println("file len: "+files.length);
-		
+		System.out.println("file len: " + files.length);
+
 		for (MultipartFile file : files) {
-			
-			if(file.getSize()>0) {
+
+			if (file.getSize() > 0) {
 				BoardFileVO boardFileVO = new BoardFileVO();
-				
-				System.out.println("file: "+file.getOriginalFilename());
+
+				System.out.println("file: " + file.getOriginalFilename());
 				String fileName = fileSaver.saveByUtils(file, path);
-				
+
 				boardFileVO.setNum(boardVO.getNum());
 				boardFileVO.setFileName(fileName);
 				boardFileVO.setOriName(file.getOriginalFilename());
-				System.out.println("oriName : "+ boardFileVO.getOriName());
+				System.out.println("oriName : " + boardFileVO.getOriName());
 				boardFileVO.setBoard(1);
-				
-				result= boardFileDAO.fileInsert(boardFileVO);
+
+				result = boardFileDAO.fileInsert(boardFileVO);
 			}
-			
+
 //			System.out.println(fileName);
 		}
-		
+
 		return result;
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
-		return noticeDAO.boardUpdate(boardVO);
+	public int boardUpdate(BoardVO boardVO, MultipartFile[] files) throws Exception {
+		String path = servletContext.getRealPath("/resources/upload/notice");
+		System.out.println("path : " + path);
+
+		int result = noticeDAO.boardUpdate(boardVO);
+		for (MultipartFile file : files) {
+			String fileName = fileSaver.saveByUtils(file, path);
+
+			System.out.println("fileName: " + fileName);
+
+			BoardFileVO boardFileVO = new BoardFileVO();
+			boardFileVO.setNum(boardVO.getNum());
+			boardFileVO.setOriName(file.getOriginalFilename());
+			boardFileVO.setFileName(fileName);
+			boardFileVO.setBoard(1);
+
+			result = boardFileDAO.fileInsert(boardFileVO);
+		}
+		// System.out.println("return result = "+result);
+		return result;
 	}
-	
+
 	@Override
 	public int boardDelete(long num) throws Exception {
-		return noticeDAO.boardDelete(num);
+		String path = servletContext.getRealPath("/resources/upload/notice");
+
+		List<BoardFileVO> list = boardFileDAO.fileList(num);
+		int result = 0;
+		for (BoardFileVO boardFileVO : list) {
+			// HDD에서 파일삭제
+			String fileName = boardFileVO.getFileName();
+			result = fileSaver.deleteFile(fileName, path);
+
+		}
+		// DB에서 데이터삭제
+		result = boardFileDAO.fileDeletes(num);
+		
+		result = noticeDAO.boardDelete(num);
+
+		return result;
 	}
 
 }

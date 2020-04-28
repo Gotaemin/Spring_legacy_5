@@ -64,7 +64,7 @@ public class QnaService implements BoardService {
 	@Override
 	public int boardWrite(BoardVO boardVO,MultipartFile[] files) throws Exception {
 		
-		String path = servletContext.getRealPath("resources/Upload/qna");
+		String path = servletContext.getRealPath("resources/upload/qna");
 		System.out.println(path);
 		
 		int result = qnaDAO.boardWrite(boardVO);
@@ -90,7 +90,7 @@ public class QnaService implements BoardService {
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
+	public int boardUpdate(BoardVO boardVO,MultipartFile[] files) throws Exception {
 		return qnaDAO.boardUpdate(boardVO);
 	}
 

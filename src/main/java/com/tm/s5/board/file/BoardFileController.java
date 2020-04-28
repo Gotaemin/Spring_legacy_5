@@ -15,11 +15,11 @@ public class BoardFileController {
 	private BoardFileService boardFileSerivce;
 	
 	@PostMapping("fileDelete")
-	public ModelAndView fileDelete(long fnum) throws Exception{
+	public ModelAndView fileDelete(BoardFileVO boardFileVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 //		System.out.println("fnum: "+fnum);
 		
-		int result = boardFileSerivce.fileDelete(fnum);
+		int result = boardFileSerivce.fileDelete(boardFileVO);
 		System.out.println(result);
 		
 		mv.addObject("result", result);

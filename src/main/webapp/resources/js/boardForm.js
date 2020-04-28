@@ -9,7 +9,10 @@
 // 		alert('click');
 // 	});
 
-var count = 0;
+var count = 1;
+
+
+
 
 $("#addfile").on("click",".remove", function() {
 	$(this).parent().remove();
@@ -18,7 +21,7 @@ $("#addfile").on("click",".remove", function() {
 
 	
 $("#add").click(function() {
-	if(count < 5 ){
+	if(count < 6){
 		$("#addfile").append('<div class="all"><input name="files" class="form-control files" type="file"/><i class="glyphicon glyphicon-remove remove"></i></div>');
 		count++;
 	}else{
@@ -74,5 +77,35 @@ $("#btn").click(function() {
 
 //$("#contents").summernote({
 //	height: 400,
-//	minHeight:400
+//	minHeight:400,
+//	
+//	callbacks:{
+//		onImageUpload: function(files){
+//			alert("upload");
+////			$summernote.summernote('insertNode', imgNode);
+//		}
+//	}
 //});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
