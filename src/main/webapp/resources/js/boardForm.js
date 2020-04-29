@@ -3,6 +3,54 @@
  */
 
 
+$('#contents').summernote({
+	height:300,
+	callbacks : {
+		onImageUpload : function(files, editor) {
+
+			var formData = new FormData(); //html의 폼태그와 같은 역할
+			formData.append('files',files[0]); //<input type="file" name="">
+			
+			$.ajax({
+				type:"post",
+				url:"../boardFile/fileInsert",
+				data:formData,
+				enctype:"multipart/form-data",
+				cache:false,
+				contentType:false,
+				processData:false,
+				success:function(imageName){
+					imageName = imageName.trim();
+					console.log(imageName);
+					$("#contents").summernote('editor.insertImage',imageName);
+					
+				}
+
+			});
+
+		},
+		
+		onMediaDelete:function(files){
+			
+			var fileName = $(files[0]).attr("src");
+			fileName = fileName.substring(fileName.lastIndexOf("/"));
+			console.log(fileName);
+			
+			$.ajax({
+				type:"post",
+				url:"../boardFile/summerDelete",
+				data:{fileName:fileName},
+				success:function(data){
+					data = data.trim();
+					console.log(data);
+				}
+			})
+		}
+		
+	}
+});
+
+
 
 // 	var btn = document.getElementById("btn");
 // 	btn.addEventListener("click",function(){
@@ -10,8 +58,6 @@
 // 	});
 
 var count = 1;
-
-
 
 
 $("#addfile").on("click",".remove", function() {

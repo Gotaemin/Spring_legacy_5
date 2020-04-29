@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tm.s5.util.FileSaver;
 
@@ -16,6 +17,26 @@ public class BoardFileService {
 	private ServletContext servletContext;
 	@Autowired
 	private FileSaver fileSaver;	
+	
+	
+	public int summerDelete(String fileName) throws Exception{
+		String path = servletContext.getRealPath("/resources/upload/summer");
+		int result = fileSaver.deleteFile(fileName, path);
+		
+		return result;
+	}
+	
+	
+	public String fileInsert(MultipartFile files) throws Exception{
+		String path = servletContext.getRealPath("/resources/upload/summer");
+		System.out.println(path);
+		
+		String fileName = fileSaver.saveByUtils(files, path);
+		path = servletContext.getContextPath()+"/resources/upload/summer/"+fileName;
+		
+		return path;
+	}
+	
 	
 	
 	public int fileDelete(BoardFileVO boardFileVO) throws Exception{
@@ -33,9 +54,6 @@ public class BoardFileService {
 		
 		
 		//DB삭제
-		
-		
-		
 		
 		return result;
 	}

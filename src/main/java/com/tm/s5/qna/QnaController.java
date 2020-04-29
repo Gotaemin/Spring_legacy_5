@@ -93,9 +93,9 @@ public class QnaController {
 	}
 
 	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
-	public ModelAndView boardUpdate2(BoardVO boardVO, ModelAndView mv) throws Exception {
+	public ModelAndView boardUpdate2(BoardVO boardVO, MultipartFile[] files, ModelAndView mv) throws Exception {
 		System.out.println("here");
-		int result = qnaService.boardUpdate(boardVO);
+		int result = qnaService.boardUpdate(boardVO,files);
 
 		System.out.println(boardVO.getNum());
 		if (result > 0) {
