@@ -20,7 +20,9 @@ public class FileSaver {
 		int result = 0;
 		
 		if(file.exists()) {
+			
 			check = file.delete();
+			System.out.println("check:"+check);
 		}
 		if(check) {
 			result = 1;

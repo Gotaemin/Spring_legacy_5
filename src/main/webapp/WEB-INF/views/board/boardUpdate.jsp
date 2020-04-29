@@ -99,8 +99,8 @@
 			$.post("../boardFile/fileDelete",{fnum:$(this).attr("id"), board:$(this).attr("title")},function(result){
 				
 				console.log(s);
-				
-				if(result.trim() > 0){
+				console.log(result);
+				if(result > 0){
 					alert("success");
 					s.parent().remove();
 					count--;

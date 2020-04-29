@@ -25,16 +25,37 @@
 		</div>
 		
 		<button id="btn">BUTTON</button>
+		<button id="btn2">BUTTON2</button>
+		
 		<script type="text/javascript">
 			$("#btn").click(function() {
-				//jQuery Ajax
-				//GET방식일때
-				alert("start");
-				$.get("./notice/noticeSelect?num=143",function(result){
-					console.log(result);
+
+				$.get("./json/json1",function(data){
+					//0.받아온 데이터가 String인지 Json Object인지 판별
+					//console.log(result);  -> "name":"iu" (String)
+					//						-> object (json object)
+					
+					//1.JSON Object로 변환
+					//- String 이라면 jsonObject로 변환
+					
+// 					data = data.trim();
+// 					data = JSON.parse(data);
+					console.log(data);
+					
+					console.log(data.num);
+					console.log(data.title);
+					
 				});
-				
-				alert("finish");
+			});
+			
+			
+			
+			$("#btn2").click(function(){
+				$.get("https://api.manana.kr/exchange/rate.json?base=KRW&code=KRW,USD,JPY",function(data){
+					console.log(data);
+					console.log(data[1]);
+					console.log(data[1].rate);
+				});
 			});
 		</script>
 		
