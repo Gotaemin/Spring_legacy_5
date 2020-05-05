@@ -42,8 +42,8 @@
 // 					data = JSON.parse(data);
 					console.log(data);
 					
-					console.log(data.num);
-					console.log(data.title);
+					console.log(data[0].num);
+					console.log(data[0].title);
 					
 				});
 			});
