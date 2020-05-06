@@ -19,12 +19,15 @@
 	<p>writer : ${list.writer }</p>
 	<p>Contents : ${list.contents}</p>
 </div>
-
-<c:forEach var="file" items="${list.boardFileVOs}">
+<c:catch>
+	<c:forEach var="file" items="${list.boardFileVOs}">
 	<div>
 		<a href="../boardFile/fileDown?fnum=${file.fnum}&board=${file.board}">${file.oriName}</a>
 	</div>
 </c:forEach>
+
+</c:catch>
+
 
 
 <div>

@@ -26,6 +26,35 @@
 		<beans:property name="order" value="0"></beans:property>
 	</beans:bean>
 	
+	
+	
+	<!-- 순서중요 : 순서 틀릴시 작동X -->
+	<interceptors>
+		<interceptor>
+			<!-- url패턴 / 적용할 interceptor클래스 -->
+			<mapping path="/*"/>
+			<beans:bean class="com.tm.s5.interceptor.TestInterceptor"></beans:bean>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/notice/*"/>
+			<exclude-mapping path="/notice/noticeList"/>
+			<exclude-mapping path="/notice/noticeSelect"/>
+			<beans:ref bean="noticeInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/user/userPage"/>
+			<beans:bean class="com.tm.s5.interceptor.UserInterceptor"></beans:bean>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/qna/*"/>
+			<exclude-mapping path="/qna/qnaList"/>
+			<beans:ref bean="qnaInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="com.tm.s5" />
 	
 	
