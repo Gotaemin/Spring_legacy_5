@@ -5,12 +5,16 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:DB/config/*.properties"></property>
+	</bean>
+	
 	<!-- 드라이버 연동 Connection -->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
-		<property name="username" value="user02"></property>
-		<property name="password" value="user02"></property>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="username" value="${oracle.user}"></property>
+		<property name="password" value="${oracle.pwd}"></property>
+		<property name="url" value="${oracle.url}"></property>
+		<property name="driverClassName" value="${oracle.driver}"></property>
 	</bean>
 	
 	<!-- mapper와 Connection을 spring가 확인 할수 있도록 설정  -->
