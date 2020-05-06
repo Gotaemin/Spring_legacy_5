@@ -48,8 +48,8 @@
 				</div>
 			</div>
 			
-			
-			<div class="form-group">
+			<c:catch>
+				<div class="form-group">
 				<label class="control-label col-sm-2" for="files">files:</label>
 				<div  class="col-sm-10">
 					<c:forEach var="fileVO" items="${boardVO.boardFileVOs}">
@@ -58,6 +58,8 @@
 				</div>
 				
 			</div>
+			</c:catch>
+			
 			
 			
 			
