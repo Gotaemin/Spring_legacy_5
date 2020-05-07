@@ -2,14 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
-		<property name="locations" value="classpath:DB/config/*.properties"></property>
-	</bean>
 	
 	<!-- 드라이버 연동 Connection -->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
@@ -42,6 +40,31 @@
 		<property name="maxUploadSize" value="104857600"></property>
 	</bean>
 	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:DB/config/*.properties"></property>
+	</bean>
+	
+	
+	
+	<!-- transaction관리자 -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- Annotation방식 -->
+	<!--<tx:annotation-driven proxy-target-class="true"/> -->
+	
+	
+	<!-- xml방식 advice역할 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.tm.s5..*Service.*(..))" id="requiredTx"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx"/>
+	</aop:config>
 	
 	
 </beans>

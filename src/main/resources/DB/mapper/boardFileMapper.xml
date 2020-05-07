@@ -6,7 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.tm.s5.board.file.BoardFileDAO">
 	<insert id="fileInsert" parameterType="BoardFileVO">
-		insert into boardfile values(file_seq.nextVal,#{num},#{fileName},#{oriName},#{board})
+<!-- 		insert into boardfile values(file_seq.nextVal,#{num},#{fileName},#{oriName},#{board}) -->
+		insert into boardfile values(1,#{num},#{fileName},#{oriName},#{board})
 	</insert>
 	
 	<select id="fileSelect" parameterType="BoardFileVO" resultType="BoardFileVO">

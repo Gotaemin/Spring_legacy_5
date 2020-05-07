@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tm.s5.board.BoardService;
@@ -69,6 +70,11 @@ public class NoticeService implements BoardService {
 				boardFileVO.setBoard(1);
 
 				result = boardFileDAO.fileInsert(boardFileVO);
+				
+				
+				if(result < 1) {
+					throw new Exception();
+				}
 			}
 
 //			System.out.println(fileName);

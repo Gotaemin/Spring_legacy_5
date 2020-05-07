@@ -75,8 +75,21 @@
 			<version>2.10.1</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
 
-
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<!--  spring-tx -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
 
 
 
@@ -106,13 +119,6 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-		<dependency>
-		    <groupId>org.aspectj</groupId>
-		    <artifactId>aspectjweaver</artifactId>
-		    <version>${org.aspectj-version}</version>
-		</dependency>
-				
 
 		<!-- Logging -->
 		<dependency>
