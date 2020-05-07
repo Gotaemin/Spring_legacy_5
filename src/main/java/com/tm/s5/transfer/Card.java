@@ -9,7 +9,7 @@ public class Card {
 		System.out.println("카드 결제");
 	}
 	
-	
+	//around를 사용하면 ProceedingJoinPoint필요
 	public Object cardCheck(ProceedingJoinPoint joinPoint) throws Throwable {
 		System.out.println("=============================");
 		System.out.println("카드 check in");
@@ -21,7 +21,6 @@ public class Card {
 		
 		
 		Object obj = joinPoint.proceed();
-		
 		System.out.println("카드 check out");
 		
 		
