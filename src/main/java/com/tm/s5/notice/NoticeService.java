@@ -1,6 +1,5 @@
 package com.tm.s5.notice;
 
-import java.io.File;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -54,23 +53,19 @@ public class NoticeService implements BoardService {
 
 		boardVO.setNum(noticeDAO.boardNum());
 
-		System.out.println("getNum: " + boardVO.getNum()); // 여기까지 됨
 
 		int result = noticeDAO.boardWrite(boardVO);
-		System.out.println("file len: " + files.length);
 
 		for (MultipartFile file : files) {
 
 			if (file.getSize() > 0) {
 				BoardFileVO boardFileVO = new BoardFileVO();
 
-				System.out.println("file: " + file.getOriginalFilename());
 				String fileName = fileSaver.saveByUtils(file, path);
 
 				boardFileVO.setNum(boardVO.getNum());
 				boardFileVO.setFileName(fileName);
 				boardFileVO.setOriName(file.getOriginalFilename());
-				System.out.println("oriName : " + boardFileVO.getOriName());
 				boardFileVO.setBoard(1);
 
 				result = boardFileDAO.fileInsert(boardFileVO);
