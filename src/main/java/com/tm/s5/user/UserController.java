@@ -167,7 +167,6 @@ public class UserController {
 	@RequestMapping(value= "userPage")
 	public String memberPage(HttpSession session,Model model) throws Exception {
 		
-		
 		return "member/memberPage";
 	}
 	

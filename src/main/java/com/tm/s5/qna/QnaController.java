@@ -89,6 +89,7 @@ public class QnaController {
 		mv.addObject("boardVO", boardVO);
 		mv.setViewName("board/boardUpdate");
 		System.out.println();
+		System.out.println();
 		return mv;
 	}
 
