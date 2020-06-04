@@ -32,7 +32,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select step from qna where num=#{num})+1,
 		(select depth from qna where num=#{num})+1
 		)
-	
 	</insert>
 	
 	
@@ -43,9 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</selectKey>
 	
 		insert into qna values(#{num},#{title},#{writer},#{contents},sysdate,0,
-		#{num},
-		0,
-		0)	
+		#{num},0,0)	
 	</insert>
 	
 	<delete id="boardDelete" parameterType="Long">
@@ -63,6 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="boardSelect" parameterType="Long" resultType="QnaVO">
 		select * from qna where num=#{num}
 	</select>
+	
 	
 	<select id="boardList" parameterType="Pager" resultType="QnaVO">
 		select * from

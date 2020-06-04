@@ -36,6 +36,7 @@ public class QnaInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,ModelAndView mv) throws Exception {
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		
 		BoardVO boardVO = (BoardVO)mv.getModel().get("boardVO");
 		String board = (String)mv.getModel().get("board");
 		board = board + "List";  //board+List

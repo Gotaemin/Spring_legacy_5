@@ -2,25 +2,25 @@ package com.tm.s5.util;
 
 public class Pager {
 
-	private Long curPage;
-	private Integer perPage;
+	private Long curPage; //현재 패이지
+	private Integer perPage; //몇개의 페이지를 아래에 띄울지 설정
 
-	private long startRow;
-	private long lastRow;
+	private long startRow; //rowNum으로 파악(열의 시작번호)
+	private long lastRow; //열의 마지막 번호
 	
-	private long totalPage;
-	private long totalBlock;
+	private long totalPage; //전체 페이지개수
+	private long totalBlock; //전체 블록 개수(아래 블록개수)
 	
 
-	private long curBlock;
-	private long startNum;
-	private long lastNum;
+	private long curBlock; //현재 블록
+	private long startNum; //현재 블록위치의 맨앞번호
+	private long lastNum; //현재 블록위치의 맨 마지막번호
 	
 	
 	private String kind;
 	private String search;
 	
-	//
+	//한페이지에 띄울 열 번호 설정
 	public void makeRow() {
 		this.startRow = (this.getCurPage() - 1) * this.getPerPage() + 1;
 		this.lastRow = this.getCurPage() * this.getPerPage();
